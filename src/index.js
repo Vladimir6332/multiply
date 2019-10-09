@@ -1,7 +1,7 @@
 module.exports = function multiply(first, second) {
   
-  let firstArr = String(first).split("").reverse();
-  let secondArr = String(second).split('').reverse();
+  let firstArr = first.split('').reverse();
+  let secondArr = second.split('').reverse();
   let resultArr = [];
   let buffer = 0;
   let summArr = [];
@@ -31,13 +31,25 @@ module.exports = function multiply(first, second) {
   };
 
   // Loking for summ items
+  buffer = 0;
   for ( let i = 0; i < itemSummArr.length; i++) {
     for (let y = 0; y < summArr.length; y++) {
-      
-    }
-  }
+      if (!(typeof summArr[y][i] === 'undefined'))
+      buffer += +summArr[y][i];                  
+    };
+    stringBuffer = String(buffer);
+      if (stringBuffer.length > 1) {
+        resultArr.push(stringBuffer[stringBuffer.length - 1]);
+        buffer = +stringBuffer.slice(0, -1);
+      }
+      else {
+        resultArr.push(stringBuffer[0]);
+        buffer = 0;
+      };
+  };
+  if (buffer > 0) resultArr.push(buffer);
 
-  return summArr;
+  return resultArr.reverse().join('');
 
 
   
